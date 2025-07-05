@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Verificación COLPSIC</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f9f9f9;
+    }
+
+    .form-container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 600px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      background-color: #ccc;
+      border: none;
+      border-radius: 5px;
+      cursor: not-allowed;
+    }
+
+    button.enabled {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Verificación Tarjetas y Antecedentes Disciplinarios</h2>
+    <form id="consultaForm">
+      <div class="form-group">
+        <label for="documento">N° Documento Identificación</label>
+        <input type="text" id="documento" name="documento" placeholder="Número sin puntos">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nombre">Primer Nombre *</label>
+          <input type="text" id="nombre" name="nombre">
+        </div>
+        <div class="form-group">
+          <label for="apellido">Primer Apellido *</label>
+          <input type="text" id="apellido" name="apellido">
+        </div>
+      </div>
+      <button type="submit" id="btnConsultar" disabled>Consultar</button>
+    </form>
+  </div>
+
+  <script>
+    const documento = document.getElementById('documento');
+    const nombre = document.getElementById('nombre');
+    const apellido = document.getElementById('apellido');
+    const btn = document.getElementById('btnConsultar');
+
+    function validateFields() {
+      if (documento.value && nombre.value && apellido.value) {
+        btn.disabled = false;
+        btn.classList.add('enabled');
+      } else {
+        btn.disabled = true;
+        btn.classList.remove('enabled');
+      }
+    }
+
+    documento.addEventListener('input', validateFields);
+    nombre.addEventListener('input', validateFields);
+    apellido.addEventListener('input', validateFields);
+
+    document.getElementById('consultaForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert(`Consultando datos para:\nDocumento: ${documento.value}\nNombre: ${nombre.value}\nApellido: ${apellido.value}`);
+    });
+  </script>
+</body>
+</html>
